@@ -73,22 +73,22 @@ def check(args, pkgname, details=False):
             for option, option_value in options.items():
                 if option_value not in [True, False]:
                     raise RuntimeError("kconfig check code can only handle"
-                                   " True/False right now, given value '" +
-                                   str(option_value) + "' is not supported. If you"
-                                   " need this, please open an issue.")
+                                       " True/False right now, given value '" +
+                                       str(option_value) + "' is not supported. If you"
+                                       " need this, please open an issue.")
                 if option_value != is_set(config, option):
                     ret = False
                     if details:
                         should = "should" if option_value else "should *not*"
                         link = ("https://wiki.postmarketos.org/wiki/"
-                                "Kernel_configuration#CONFIG_" + key)
+                                "Kernel_configuration#CONFIG_" + option)
                         logging.info("WARNING: " + path + ": CONFIG_" + option + " " +
-                                should + " be set. See <" + link +
-                                 "> for details.")
+                                     should + " be set. See <" + link +
+                                     "> for details.")
                     else:
                         logging.warning("WARNING: " + path + " isn't configured"
-                                    " properly for postmarketOS, run"
-                                    " 'pmbootstrap kconfig_check' for"
-                                    " details!")
+                                        " properly for postmarketOS, run"
+                                        " 'pmbootstrap kconfig_check' for"
+                                        " details!")
                         break
     return ret
