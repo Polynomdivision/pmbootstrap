@@ -56,18 +56,20 @@ def check(args, pkgname, details=False):
         with open(config_path) as handle:
             config = handle.read()
 
+        # The architecture of the config is in the name, so it just needs to be
+        # extracted
+        config_arch = os.path.basename(config_path).split(".")[1]
+
         # Loop trough necessary config options, and print a warning,
         # if any is missing
         path = "linux-" + flavor + "/" + os.path.basename(config_path)
-        apkbuild = pmb.parse.apkbuild(args, aport + "/APKBUILD")
         for archs, options in pmb.config.necessary_kconfig_options.items():
             if archs != "all":
                 # Split and check if the device's architecture architecture has special config
                 # options. If option does not contain the architecture of the device
                 # kernel, then just skip the option.
-                # TODO: Should the device APKBUILDs support multiple architectures?
                 architectures = archs.split(" ")
-                if not apkbuild["arch"][0] in architectures:
+                if config_arch not in architectures:
                     continue
 
             for option, option_value in options.items():
