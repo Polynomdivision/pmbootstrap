@@ -61,6 +61,25 @@ def check_grsec(args):
                        " more details: <" + link + ">")
 
 
+def check_binfmt_misc(args):
+    """
+    Check if the 'binfmt_misc' module is loaded by checking, if
+    /proc/sys/fs/binfmt_misc/ exists. If it exists, then do nothing.
+    Otherwise, raise an exception pointing to user to the Wiki.
+    """
+    path = "/proc/sys/fs/binfmt_misc/"
+    if os.path.exists(path):
+        return
+
+    link = "https://wiki.postmarketos.org/wiki/Troubleshooting#sh:_can.27t_create_.2Fproc.2Fsys.2Ffs.2Fbinfmt_misc.2Fregister:_nonexistent_directory"
+    raise RuntimeError("It appears that your system has not loaded the"
+                       " module 'binfmt_misc'. This can lead to"
+                       " problems later on, so it would be best"
+                       " if you followed the troubleshooting"
+                       " steps in the Wiki."
+                       " \nSee <" + link + ">")
+
+
 def migrate_success(args):
     logging.info("Migration done")
     with open(args.work + "/version", "w") as handle:
