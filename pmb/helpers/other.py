@@ -71,12 +71,11 @@ def check_binfmt_misc(args):
     if os.path.exists(path):
         return
 
-    link = "https://wiki.postmarketos.org/wiki/Troubleshooting#sh:_can.27t_create_.2Fproc.2Fsys.2Ffs.2Fbinfmt_misc.2Fregister:_nonexistent_directory"
+    link = "https://postmarketos.org/binfmt_misc"
     raise RuntimeError("It appears that your system has not loaded the"
-                       " module 'binfmt_misc'. This can lead to"
-                       " problems later on, so it would be best"
-                       " if you followed the troubleshooting"
-                       " steps in the Wiki."
+                       " module 'binfmt_misc'. This is required to run"
+                       " foreign architecture programs with QEMU (eg. "
+                       " armhf on x86_64):"
                        " \nSee <" + link + ">")
 
 
