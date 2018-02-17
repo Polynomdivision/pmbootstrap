@@ -39,7 +39,6 @@ def main():
     try:
         # Sanity checks
         other.check_grsec(args)
-        other.check_binfmt_misc(args)
         if not args.as_root and os.geteuid() == 0:
             raise RuntimeError("Do not run pmbootstrap as root!")
 
