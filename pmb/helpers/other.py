@@ -74,9 +74,8 @@ def check_binfmt_misc(args):
     link = "https://postmarketos.org/binfmt_misc"
     raise RuntimeError("It appears that your system has not loaded the"
                        " module 'binfmt_misc'. This is required to run"
-                       " foreign architecture programs with QEMU (eg. "
-                       " armhf on x86_64):"
-                       " \nSee <" + link + ">")
+                       " foreign architecture programs with QEMU (eg."
+                       " armhf on x86_64):\n See: <" + link + ">")
 
 
 def migrate_success(args):
